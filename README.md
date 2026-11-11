@@ -1,51 +1,48 @@
 # Dashboard Integrado
 
-Aplicação web para acompanhamento das notas de manutenção de embalagem, reunindo em um único ambiente a situação atual das linhas, análise histórica, gráfico de tendências e plano de ação.
+Projeto desenvolvido para facilitar o acompanhamento das notas de manutenção de embalagem de forma mais visual e organizada.
 
-O projeto foi desenvolvido com **HTML, CSS, JavaScript, Chart.js e Supabase**.
+A ideia principal é reunir em um só lugar as informações das linhas, os indicadores atuais, o histórico das medições e também o plano de ação.
 
-## Funcionalidades
+## O que tem no sistema
 
-- Visão geral das notas por categoria:
-  - Amarelas
-  - Vermelhas
-  - ND
-  - Total geral
-- Distribuição das notas por linha.
-- Situação individual de cada linha.
-- Indicadores e informações adicionais.
-- Detalhamento dos dados.
-- Gráfico de Tendências integrado.
-- Acompanhamento da evolução das notas ao longo do tempo.
-- Indicadores de redução por categoria.
-- Acompanhamento de meta.
-- Plano de Ação com publicação de imagem.
-- Títulos e descrições personalizáveis.
-- Área administrativa protegida por autenticação.
-- Interface pública para consulta dos dados.
+- Visão geral das notas Amarelas, Vermelhas e ND.
+- Total geral por linha.
+- Gráfico de distribuição das notas.
+- Consulta da situação de cada linha.
+- Detalhamento dos valores.
+- Gráfico de tendências com o histórico das medições.
+- Indicadores de redução ao longo do período.
+- Acompanhamento da meta de redução.
+- Plano de ação com imagem.
+- Área administrativa para atualização das informações.
+- Edição de títulos, indicadores e outros dados exibidos no painel.
 
-## Gráfico de Tendências
+## Gráfico de tendências
 
-O dashboard possui uma área integrada para acompanhamento histórico das notas.
+O gráfico de tendências foi integrado ao dashboard para permitir acompanhar melhor a evolução das notas ao longo do tempo.
 
-O gráfico permite visualizar as medições registradas ao longo do tempo e acompanhar a evolução das categorias:
+Além das medições, também são exibidos indicadores de redução das notas Amarelas, Vermelhas e ND, considerando as movimentações realizadas durante o período.
 
-- Amarelas
-- Vermelhas
-- ND
+## Plano de ação
 
-Os indicadores consideram as movimentações ocorridas durante todo o período analisado, permitindo uma visão mais completa da evolução das notas.
+Também foi adicionada uma área para o plano de ação.
 
-## Plano de Ação
+Pela área administrativa é possível selecionar uma imagem, visualizar antes de publicar e depois disponibilizá-la na página pública.
 
-A seção de Plano de Ação permite disponibilizar uma imagem em destaque para consulta na página pública.
+## Tecnologias utilizadas
 
-Na área administrativa é possível selecionar, pré-visualizar, publicar, substituir ou remover a imagem exibida.
+- HTML
+- CSS
+- JavaScript
+- Chart.js
+- Supabase
+- Git
+- GitHub Pages
 
 ## Estrutura do projeto
 
 ```text
-dashboard-manutencao/
 ├── css/
 ├── img/
 ├── js/
@@ -57,34 +54,15 @@ dashboard-manutencao/
 └── README.md
 ```
 
-## Tecnologias utilizadas
-
-- HTML5
-- CSS3
-- JavaScript
-- Chart.js
-- Supabase
-- Git
-- GitHub
-- GitHub Pages
-
 ## Área administrativa
 
-A aplicação possui uma área administrativa utilizada para atualização e gerenciamento das informações exibidas no dashboard.
+O sistema possui uma área administrativa para atualização dos dados exibidos no dashboard.
 
-Entre as funcionalidades disponíveis estão:
+Por ela é possível editar as informações das linhas, adicionar medições no gráfico de tendências, alterar alguns textos do painel e atualizar o plano de ação.
 
-- atualização dos dados;
-- edição de indicadores;
-- gerenciamento das informações das linhas;
-- cadastro de medições;
-- edição do gráfico de tendências;
-- gerenciamento do plano de ação;
-- personalização de títulos e descrições.
+## Objetivo
 
-## Página pública
-
-A página pública permite consultar as informações do dashboard sem necessidade de autenticação.
+O objetivo do projeto é centralizar as informações de manutenção de embalagem em um único painel, deixando o acompanhamento mais simples e facilitando a visualização da situação atual e da evolução das notas ao longo do tempo.
 
 Ela apresenta os dados cadastrados através da área administrativa de forma organizada e visual.
 
