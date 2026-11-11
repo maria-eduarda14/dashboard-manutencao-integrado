@@ -36,40 +36,6 @@
         <button class="standalone-auth-btn primary" type="submit">Entrar</button>
       </form>
 
-      <form id="cadastroForm" hidden>
-        <div class="auth-form-group">
-          <label for="cadastroEmail">E-mail</label>
-          <input id="cadastroEmail" type="email" autocomplete="email" required>
-        </div>
-        <div class="auth-form-group">
-          <label for="cadastroSenha">Senha</label>
-          <div class="standalone-password-field">
-            <input id="cadastroSenha" type="password" autocomplete="new-password" minlength="8" required>
-            <button class="standalone-password-toggle" type="button" data-target="cadastroSenha"
-              aria-label="Mostrar senha" title="Mostrar senha">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div class="auth-form-group">
-          <label for="cadastroConfirmacao">Confirmar senha</label>
-          <div class="standalone-password-field">
-            <input id="cadastroConfirmacao" type="password" autocomplete="new-password" minlength="8" required>
-            <button class="standalone-password-toggle" type="button" data-target="cadastroConfirmacao"
-              aria-label="Mostrar senha" title="Mostrar senha">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <button class="standalone-auth-btn primary" type="submit">Cadastrar</button>
-      </form>
-
       <form id="recuperacaoForm" hidden>
         <div class="auth-form-group">
           <label for="recuperacaoEmail">E-mail cadastrado</label>
@@ -79,7 +45,6 @@
       </form>
 
       <div id="authNav" class="standalone-auth-nav">
-        <button type="button" class="standalone-auth-btn outline" id="acaoCadastrar">Criar conta</button>
         <button type="button" class="standalone-auth-link" id="acaoRecuperar">Esqueceu sua senha?</button>
       </div>
 
