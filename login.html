@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administração - Manutenção</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="standalone-auth-page">
+  <main class="standalone-auth-wrap">
+    <section class="standalone-auth-card">
+      <h1 id="authTitulo">Administração</h1>
+      <p id="authDescricao">Entre para editar os dados do dashboard.</p>
+      <div id="loginAviso" class="standalone-notice" role="status" aria-live="polite"></div>
+
+      <form id="loginForm">
+        <div class="auth-form-group">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="auth-form-group">
+          <label for="senha">Senha</label>
+          <div class="standalone-password-field">
+            <input id="senha" type="password" autocomplete="current-password" required>
+            <button class="standalone-password-toggle" type="button" data-target="senha" aria-label="Mostrar senha" title="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <button class="standalone-auth-btn primary" type="submit">Entrar</button>
+      </form>
+
+      <form id="cadastroForm" hidden>
+        <div class="auth-form-group">
+          <label for="cadastroEmail">E-mail</label>
+          <input id="cadastroEmail" type="email" autocomplete="email" required>
+        </div>
+        <div class="auth-form-group">
+          <label for="cadastroSenha">Senha</label>
+          <div class="standalone-password-field">
+            <input id="cadastroSenha" type="password" autocomplete="new-password" minlength="8" required>
+            <button class="standalone-password-toggle" type="button" data-target="cadastroSenha" aria-label="Mostrar senha" title="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="auth-form-group">
+          <label for="cadastroConfirmacao">Confirmar senha</label>
+          <div class="standalone-password-field">
+            <input id="cadastroConfirmacao" type="password" autocomplete="new-password" minlength="8" required>
+            <button class="standalone-password-toggle" type="button" data-target="cadastroConfirmacao" aria-label="Mostrar senha" title="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <button class="standalone-auth-btn primary" type="submit">Cadastrar</button>
+      </form>
+
+      <form id="recuperacaoForm" hidden>
+        <div class="auth-form-group">
+          <label for="recuperacaoEmail">E-mail cadastrado</label>
+          <input id="recuperacaoEmail" type="email" autocomplete="email" required>
+        </div>
+        <button class="standalone-auth-btn primary" type="submit">Enviar link de recuperação</button>
+      </form>
+
+      <div id="authNav" class="standalone-auth-nav">
+        <button type="button" class="standalone-auth-btn outline" id="acaoCadastrar">Criar conta</button>
+        <button type="button" class="standalone-auth-link" id="acaoRecuperar">Esqueceu sua senha?</button>
+      </div>
+
+      <button type="button" class="standalone-auth-link standalone-back" id="voltarLogin" hidden>← Voltar ao login</button>
+      <p class="standalone-public-link"><a href="index.html">← Voltar ao painel público</a></p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase/config.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

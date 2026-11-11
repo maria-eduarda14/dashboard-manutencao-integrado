@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas de Manutenção de Embalagem</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <aside id="dashboardSidebar" class="dashboard-sidebar" aria-label="Navegação do dashboard">
+        <div class="sidebar-brand">
+            <button id="sidebarToggle" class="sidebar-menu-button" type="button" aria-label="Abrir menu"
+                aria-expanded="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+            </button>
+            <div class="sidebar-brand-copy">
+                <strong>Manutenção</strong>
+                <span>Embalagem</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="sidebar-link active" type="button" data-view-target="overview">
+                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z" />
+                    </svg></span>
+                <span class="sidebar-label">Visão geral</span>
+            </button>
+            <button class="sidebar-link" type="button" data-view-target="distribution">
+                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 20V10m7 10V4m7 16v-7" />
+                        <path d="M3 20h18" />
+                    </svg></span>
+                <span class="sidebar-label">Distribuição</span>
+            </button>
+            <button class="sidebar-link" type="button" data-view-target="status">
+                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                        <path d="M12 7v5l3 2" />
+                    </svg></span>
+                <span class="sidebar-label">Situação por linha</span>
+            </button>
+            <button class="sidebar-link" type="button" data-view-target="details">
+                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="16" rx="2" />
+                        <path d="M3 9h18M9 4v16" />
+                    </svg></span>
+                <span class="sidebar-label">Detalhamento</span>
+            </button>
+            <button class="sidebar-link" type="button" data-view-target="trends">
+                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 18 9 12l4 3 7-9" />
+                        <path d="M4 20h16" />
+                    </svg></span>
+                <span class="sidebar-label">Gráfico de tendências</span>
+            </button>
+            <button class="sidebar-link" type="button" data-view-target="action-plan">
+                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="4" y="3" width="16" height="18" rx="2" />
+                        <path d="M8 8h8M8 12h8M8 16h5" />
+                    </svg></span>
+                <span class="sidebar-label">Plano de ação</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <a class="sidebar-link sidebar-admin-link" href="admin.html" aria-label="Acessar administração">
+                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                        <path d="M4.5 20c.7-3.3 3.5-5.5 7.5-5.5s6.8 2.2 7.5 5.5" />
+                    </svg></span>
+                <span class="sidebar-label">Administração</span>
+            </a>
+        </div>
+    </aside>
+    <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- =========================================
+             CABEÇALHO
+        ========================================== -->
+            <header>
+                <div class="logo-box">
+                    <img class="logo" src="img/logo.png" alt="Logo"
+                        onerror="this.closest('.logo-box').style.display='none'">
+                </div>
+                <div id="adminBadge" class="admin-badge admin-only">
+                    Modo administrador
+                </div>
+            </header>
+
+
+            <!-- =========================================
+             TOTAIS GERAIS
+             Estes valores serão calculados pelo JS.
+        ========================================== -->
+            <section class="dashboard-view active overview-view" data-dashboard-view="overview">
+                <div class="view-heading overview-heading">
+                    <div>
+                        <span class="view-eyebrow">Painel</span>
+                        <div class="editable-view-heading-row">
+                            <h2 data-view-title="overview">Visão geral</h2>
+                        </div>
+                        <p data-view-subtitle="overview">Resumo atual das notas de manutenção de embalagem.</p>
+                    </div>
+                </div>
+
+                <div class="cards overview-kpis">
+                    <div class="card yellow overview-kpi-card">
+                        <div class="card-title">Notas Amarelas</div>
+                        <div id="totalAmarela" class="card-value">0</div>
+                        <div id="percentAmarela" class="card-meta">0% do total</div>
+                    </div>
+
+                    <div class="card red overview-kpi-card">
+                        <div class="card-title">Notas Vermelhas</div>
+                        <div id="totalVermelha" class="card-value">0</div>
+                        <div id="percentVermelha" class="card-meta">0% do total</div>
+                    </div>
+
+                    <div class="card gray overview-kpi-card">
+                        <div class="card-title">ND</div>
+                        <div id="totalNd" class="card-value">0</div>
+                        <div id="percentNd" class="card-meta">0% do total</div>
+                    </div>
+
+                    <div class="card total overview-kpi-card">
+                        <div class="card-title">Total Geral</div>
+                        <div id="totalGeral" class="card-value">0</div>
+                        <div id="totalLinhasResumo" class="card-meta">0 linhas monitoradas</div>
+                    </div>
+                </div>
+                <br>
+                <div class="overview-content-grid">
+                    <section class="overview-panel overview-ranking-panel">
+                        <div class="overview-panel-header">
+                            <div>
+                                <span class="overview-panel-kicker">Prioridades</span>
+                                <h3>Resumo das linhas</h3>
+                                <p>Linhas com maior quantidade total de notas.</p>
+                            </div>
+                            <button type="button" class="overview-link-button" data-go-view="details">Ver
+                                detalhamento</button>
+                        </div>
+                        <div id="overviewRanking" class="overview-ranking"></div>
+                    </section>
+
+                    <section class="overview-panel overview-distribution-panel">
+                        <div class="overview-panel-header">
+                            <div>
+                                <span class="overview-panel-kicker">Composição</span>
+                                <h3>Distribuição geral</h3>
+                                <p>Participação de cada classificação no total atual.</p>
+                            </div>
+                        </div>
+
+                        <div class="overview-distribution-content">
+                            <div id="overviewDonut" class="overview-donut" aria-label="Distribuição geral das notas">
+                                <div class="overview-donut-center">
+                                    <strong id="overviewDonutTotal">0</strong>
+                                    <span>notas</span>
+                                </div>
+                            </div>
+
+                            <div class="overview-legend">
+                                <div class="overview-legend-row">
+                                    <span class="overview-legend-name"><i
+                                            class="legend-dot yellow-dot"></i>Amarelas</span>
+                                    <strong id="overviewLegendAmarela">0</strong>
+                                </div>
+                                <div class="overview-legend-row">
+                                    <span class="overview-legend-name"><i
+                                            class="legend-dot red-dot"></i>Vermelhas</span>
+                                    <strong id="overviewLegendVermelha">0</strong>
+                                </div>
+                                <div class="overview-legend-row">
+                                    <span class="overview-legend-name"><i class="legend-dot gray-dot"></i>ND</span>
+                                    <strong id="overviewLegendNd">0</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="overview-primary-link" data-go-view="distribution">
+                            Ver distribuição completa
+                        </button>
+                    </section>
+                </div>
+
+                <section class="overview-panel overview-highlights-panel">
+                    <div class="overview-panel-header">
+                        <div>
+                            <span class="overview-panel-kicker">Destaques</span>
+                            <h3>Leitura rápida do cenário</h3>
+                        </div>
+                    </div>
+
+                    <div class="overview-highlights-grid">
+                        <div class="overview-highlight-card">
+                            <span>Maior total</span>
+                            <strong id="highlightMaiorTotal">—</strong>
+                            <small id="highlightMaiorTotalValor">0 notas</small>
+                        </div>
+                        <div class="overview-highlight-card">
+                            <span>Mais vermelhas</span>
+                            <strong id="highlightVermelhas">—</strong>
+                            <small id="highlightVermelhasValor">0 notas</small>
+                        </div>
+                        <div class="overview-highlight-card">
+                            <span>Mais ND</span>
+                            <strong id="highlightNd">—</strong>
+                            <small id="highlightNdValor">0 notas</small>
+                        </div>
+                        <div class="overview-highlight-card">
+                            <span>Mais amarelas</span>
+                            <strong id="highlightAmarelas">—</strong>
+                            <small id="highlightAmarelasValor">0 notas</small>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="overview-shortcuts">
+                    <button type="button" class="overview-shortcut" data-go-view="distribution">
+                        <span class="overview-shortcut-icon">▥</span>
+                        <span><strong>Distribuição</strong><small>Visualizar o gráfico completo</small></span>
+                        <b>→</b>
+                    </button>
+                    <button type="button" class="overview-shortcut" data-go-view="status">
+                        <span class="overview-shortcut-icon">◎</span>
+                        <span><strong>Analisar linha</strong><small>Abrir situação e evolução</small></span>
+                        <b>→</b>
+                    </button>
+                    <button type="button" class="overview-shortcut" data-go-view="details">
+                        <span class="overview-shortcut-icon">▤</span>
+                        <span><strong>Detalhamento</strong><small>Consultar valores por linha</small></span>
+                        <b>→</b>
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- =========================================
+             GRÁFICO
+        ========================================== -->
+            <section class="chart-container dashboard-view" data-dashboard-view="distribution">
+
+                <div class="chart-header">
+
+                    <div>
+                        <div class="editable-view-heading-row">
+                            <h2 data-view-title="distribution">Distribuição das notas por linha</h2>
+                        </div>
+                        <p class="view-config-subtitle chart-view-subtitle" data-view-subtitle="distribution">Visualize
+                            a distribuição das notas amarelas, vermelhas e ND por linha.</p>
+                    </div>
+
+                    <div class="admin-hint admin-only">
+                        Selecione uma linha para editar seus dados
+                    </div>
+
+                </div>
+
+                <div class="chart-wrapper">
+                    <canvas id="notasChart"></canvas>
+                </div>
+
+            </section>
+
+
+            <!-- =========================================
+             PAINEL DE VENCIMENTO
+        ========================================== -->
+            <section id="vencimentoPanel" class="vencimento-panel dashboard-view" data-dashboard-view="status">
+                <div class="status-view-intro">
+                    <span class="view-eyebrow">Análise</span>
+                    <div class="editable-view-heading-row">
+                        <h2 data-view-title="status">Situação por linha</h2>
+                    </div>
+                    <p data-view-subtitle="status">Escolha uma linha para visualizar seus indicadores e informações.</p>
+                    <div class="status-line-picker">
+                        <label for="statusLineSelector">Linha</label>
+                        <select id="statusLineSelector" aria-label="Selecionar linha">
+                            <option value="">Selecione uma linha</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="vencimento-header">
+                    <div class="vencimento-title-wrap">
+                        <h3 id="painelTituloLinha">Evolução e situação da linha</h3>
+                        <button id="editarPainelTitulo" type="button" class="title-edit-btn admin-only"
+                            aria-label="Editar título do painel" title="Editar título">✎</button>
+                    </div>
+                    <span id="linhaSelecionada" class="linha-selecionada">—</span>
+                </div>
+                <div class="resumo-linha-grid">
+                    <div class="resumo-item atual-item">
+                        <span class="resumo-label">Total atual</span>
+                        <span id="totalAtualLinha" class="resumo-value">0</span>
+                        <span class="resumo-sub">notas/etiquetas no gráfico</span>
+                    </div>
+
+                    <div id="cardMelhoriaLinha" class="resumo-item melhoria-item">
+                        <div class="card-actions admin-only">
+                            <button id="editarMelhoria" type="button" class="card-action-btn"
+                                aria-label="Editar card de melhoria" title="Editar">✎</button>
+                            <button id="removerMelhoria" type="button" class="card-action-btn danger"
+                                aria-label="Remover card de melhoria" title="Remover">×</button>
+                        </div>
+
+                        <span id="melhoriaTituloLinha" class="resumo-label">Melhoria desde o início</span>
+                        <span id="melhoriaLinha" class="resumo-value melhoria-value">—</span>
+                        <span id="comparacaoBaseLinha" class="resumo-sub">Base não definida</span>
+                    </div>
+
+                    <div id="cardResumoPrincipal" class="resumo-item vencidas-item">
+                        <div class="card-actions admin-only">
+                            <button id="editarResumoPrincipal" type="button" class="card-action-btn"
+                                aria-label="Editar indicador principal" title="Editar">✎</button>
+                            <button id="removerResumoPrincipal" type="button" class="card-action-btn danger"
+                                aria-label="Remover indicador principal" title="Remover">×</button>
+                        </div>
+
+                        <span id="resumoTituloLinha" class="resumo-label">Vencidas</span>
+                        <span id="resumoValorLinha" class="resumo-value">0</span>
+                        <span class="resumo-sub">indicador da linha</span>
+                    </div>
+                </div>
+
+                <div id="cardsOcultosArea" class="cards-ocultos-area admin-only" style="display:none"></div>
+
+                <div id="informacoesAdicionaisSection" class="info-adicional-section">
+                    <div class="info-adicional-header">
+                        <div>
+                            <div class="info-title-row">
+                                <div id="informacoesTituloLinha" class="info-adicional-titulo">Informações adicionais
+                                </div>
+                                <button id="editarInformacoesTitulo" type="button" class="title-edit-btn admin-only"
+                                    aria-label="Editar título das informações adicionais"
+                                    title="Editar título">✎</button>
+                            </div>
+                            <div class="info-adicional-subtitulo admin-only">
+                                Use este espaço para registrar detalhes específicos desta linha, como programações,
+                                reavaliações ou outros status relevantes.
+                            </div>
+                        </div>
+
+                        <button id="btnAdicionarInformacao" type="button" class="add-info-btn admin-only">
+                            + Adicionar informação
+                        </button>
+                    </div>
+
+                    <div id="informacoesAdicionaisLista" class="info-adicional-lista"></div>
+                </div>
+            </section>
+
+            <section class="table-container dashboard-view" data-dashboard-view="details">
+
+                <div class="table-header">
+
+                    <div class="editable-view-heading-row">
+                        <h2 data-view-title="details">Detalhamento por linha</h2>
+                    </div>
+                    <p class="view-config-subtitle table-view-subtitle" data-view-subtitle="details">Consulte os valores
+                        de cada classificação em todas as linhas.</p>
+
+                    <span class="admin-hint admin-only">
+                        Clique na linha para alterar um valor
+                    </span>
+
+                </div>
+
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Classificação</th>
+
+                            <th>Linha 1</th>
+                            <th>Linha 2</th>
+                            <th>Linha 3</th>
+                            <th>Linha 4</th>
+                            <th>Linha 5</th>
+                            <th>Linha 6</th>
+                            <th>Linha 7</th>
+                            <th>Linha 8</th>
+                            <th>Linha 9</th>
+                            <th>Linha 10</th>
+                            <th>Linha 14</th>
+                        </tr>
+                    </thead>
+
+
+                    <!-- O JavaScript poderá preencher daqui para frente -->
+                    <tbody id="detalhamentoBody">
+
+                        <tr id="rowAmarela">
+
+                            <td>
+                                <span class="badge badge-yellow">
+                                    Amarela
+                                </span>
+                            </td>
+
+                            <td data-linha="Linha 1" data-field="amarela">0</td>
+                            <td data-linha="Linha 2" data-field="amarela">0</td>
+                            <td data-linha="Linha 3" data-field="amarela">0</td>
+                            <td data-linha="Linha 4" data-field="amarela">0</td>
+                            <td data-linha="Linha 5" data-field="amarela">0</td>
+                            <td data-linha="Linha 6" data-field="amarela">0</td>
+                            <td data-linha="Linha 7" data-field="amarela">0</td>
+                            <td data-linha="Linha 8" data-field="amarela">0</td>
+                            <td data-linha="Linha 9" data-field="amarela">0</td>
+                            <td data-linha="Linha 10" data-field="amarela">0</td>
+                            <td data-linha="Linha 14" data-field="amarela">0</td>
+
+                        </tr>
+
+
+                        <tr id="rowVermelha">
+
+                            <td>
+                                <span class="badge badge-red">
+                                    Vermelha
+                                </span>
+                            </td>
+
+                            <td data-linha="Linha 1" data-field="vermelha">0</td>
+                            <td data-linha="Linha 2" data-field="vermelha">0</td>
+                            <td data-linha="Linha 3" data-field="vermelha">0</td>
+                            <td data-linha="Linha 4" data-field="vermelha">0</td>
+                            <td data-linha="Linha 5" data-field="vermelha">0</td>
+                            <td data-linha="Linha 6" data-field="vermelha">0</td>
+                            <td data-linha="Linha 7" data-field="vermelha">0</td>
+                            <td data-linha="Linha 8" data-field="vermelha">0</td>
+                            <td data-linha="Linha 9" data-field="vermelha">0</td>
+                            <td data-linha="Linha 10" data-field="vermelha">0</td>
+                            <td data-linha="Linha 14" data-field="vermelha">0</td>
+
+                        </tr>
+
+
+                        <tr id="rowNd">
+
+                            <td>
+                                <span class="badge badge-gray">
+                                    ND
+                                </span>
+                            </td>
+
+                            <td data-linha="Linha 1" data-field="nd">0</td>
+                            <td data-linha="Linha 2" data-field="nd">0</td>
+                            <td data-linha="Linha 3" data-field="nd">0</td>
+                            <td data-linha="Linha 4" data-field="nd">0</td>
+                            <td data-linha="Linha 5" data-field="nd">0</td>
+                            <td data-linha="Linha 6" data-field="nd">0</td>
+                            <td data-linha="Linha 7" data-field="nd">0</td>
+                            <td data-linha="Linha 8" data-field="nd">0</td>
+                            <td data-linha="Linha 9" data-field="nd">0</td>
+                            <td data-linha="Linha 10" data-field="nd">0</td>
+                            <td data-linha="Linha 14" data-field="nd">0</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <section class="dashboard-view integration-view" data-dashboard-view="trends">
+                <div class="integration-heading">
+                    <div>
+                        <span class="integration-kicker">ACOMPANHAMENTO HISTÓRICO</span>
+                        <div class="editable-view-heading-row">
+                            <h2 data-view-title="trends">Gráfico de tendências</h2>
+                        </div>
+                        <p data-view-subtitle="trends">Acompanhe a evolução das notas ao longo das medições registradas.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="trendError" class="integration-notice error" hidden></div>
+
+                <div class="trend-cards">
+                    <article class="trend-card geral">
+                        <span id="trendTitleGeral" class="trend-card-title">Meta</span>
+                        <strong id="trendValueGeral" class="trend-card-value">—</strong>
+                        <small id="trendComplementGeral" class="trend-card-complement">para atingir a meta de
+                            85%</small>
+                        <span id="trendDetailGeral" class="trend-card-detail"></span>
+                    </article>
+                    <article class="trend-card amarela">
+                        <span id="trendTitleAmarela" class="trend-card-title">Redução Notas Amarelas</span>
+                        <strong id="trendValueAmarela" class="trend-card-value">—</strong>
+                        <small id="trendComplementAmarela" class="trend-card-complement"></small>
+                        <span id="trendDetailAmarela" class="trend-card-detail"></span>
+                    </article>
+                    <article class="trend-card vermelha">
+                        <span id="trendTitleVermelha" class="trend-card-title">Redução Notas Vermelhas</span>
+                        <strong id="trendValueVermelha" class="trend-card-value">—</strong>
+                        <small id="trendComplementVermelha" class="trend-card-complement"></small>
+                        <span id="trendDetailVermelha" class="trend-card-detail"></span>
+                    </article>
+                    <article class="trend-card nd">
+                        <span id="trendTitleNd" class="trend-card-title">Redução Notas ND</span>
+                        <strong id="trendValueNd" class="trend-card-value">—</strong>
+                        <small id="trendComplementNd" class="trend-card-complement"></small>
+                        <span id="trendDetailNd" class="trend-card-detail"></span>
+                    </article>
+                </div>
+
+                <div class="trend-chart-panel">
+                    <div id="trendEmpty" class="integration-empty" hidden>Nenhuma medição cadastrada.</div>
+                    <div class="trend-chart-wrapper">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-view integration-view" data-dashboard-view="action-plan">
+                <div class="integration-heading">
+                    <div>
+                        <span class="integration-kicker">ACOMPANHAMENTO VISUAL</span>
+                        <div class="editable-view-heading-row">
+                            <h2 data-view-title="action-plan">Plano de ação</h2>
+                        </div>
+                        <p data-view-subtitle="action-plan">Visualização do plano de ação mais recente disponibilizado
+                            pela administração.</p>
+                    </div>
+                </div>
+
+                <div id="actionPlanPublicState" class="action-plan-stage">
+                    <div id="actionPlanEmpty" class="action-plan-empty">
+                        <strong>Não há imagem a ser exibida</strong>
+                        <span>O plano de ação ainda não foi publicado.</span>
+                    </div>
+                    <img id="actionPlanImage" class="action-plan-image" alt="Plano de ação" hidden>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase/config.js"></script>
+    <script src="js/ui-dialog.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/integrations.js"></script>
+    <script src="js/view-config.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+
+</html>
