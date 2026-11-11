@@ -1,76 +1,99 @@
-# Notas de Manutenção de Embalagem
+# Dashboard Integrado
 
-Dashboard web para acompanhamento das notas de manutenção de embalagem, com visualização gráfica, análise por linha e área administrativa integrada ao Supabase.
+Aplicação web para acompanhamento das notas de manutenção de embalagem, reunindo em um único ambiente a situação atual das linhas, análise histórica, gráfico de tendências e plano de ação.
 
-## Interface
+O projeto foi desenvolvido com **HTML, CSS, JavaScript, Chart.js e Supabase**.
 
-A interface utiliza um menu lateral retrátil para separar as informações do painel em áreas independentes:
+## Funcionalidades
 
-- **Visão geral** — totais de notas Amarelas, Vermelhas, ND e Total Geral;
-- **Distribuição** — gráfico de distribuição das notas por linha;
-- **Situação por linha** — indicadores e informações adicionais da linha selecionada;
-- **Detalhamento** — tabela completa dos valores de cada linha.
+- Visão geral das notas por categoria:
+  - Amarelas
+  - Vermelhas
+  - ND
+  - Total geral
+- Distribuição das notas por linha.
+- Situação individual de cada linha.
+- Indicadores e informações adicionais.
+- Detalhamento dos dados.
+- Gráfico de Tendências integrado.
+- Acompanhamento da evolução das notas ao longo do tempo.
+- Indicadores de redução por categoria.
+- Acompanhamento de meta.
+- Plano de Ação com publicação de imagem.
+- Títulos e descrições personalizáveis.
+- Área administrativa protegida por autenticação.
+- Interface pública para consulta dos dados.
 
-No desktop, o menu se expande ao passar o mouse e também pode ser fixado aberto pelo botão de menu. Em telas menores, ele funciona como uma navegação lateral expansível.
+## Gráfico de Tendências
 
-Na área administrativa, o menu também apresenta o usuário autenticado e a opção de logout.
+O dashboard possui uma área integrada para acompanhamento histórico das notas.
 
-## Estrutura
+O gráfico permite visualizar as medições registradas ao longo do tempo e acompanhar a evolução das categorias:
+
+- Amarelas
+- Vermelhas
+- ND
+
+Os indicadores consideram as movimentações ocorridas durante todo o período analisado, permitindo uma visão mais completa da evolução das notas.
+
+## Plano de Ação
+
+A seção de Plano de Ação permite disponibilizar uma imagem em destaque para consulta na página pública.
+
+Na área administrativa é possível selecionar, pré-visualizar, publicar, substituir ou remover a imagem exibida.
+
+## Estrutura do projeto
 
 ```text
-manutencao/
+dashboard-manutencao/
 ├── css/
-│   ├── style.css
-│   └── admin.css
 ├── img/
-│   ├── logo.png
-│   └── README.md
 ├── js/
-│   ├── index.js
-│   ├── admin.js
-│   └── navigation.js
 ├── supabase/
-│   └── config.js
 ├── admin.html
 ├── index.html
 ├── login.html
-├── original.html
 ├── LICENSE
 └── README.md
 ```
 
-## Tecnologias
+## Tecnologias utilizadas
 
 - HTML5
 - CSS3
 - JavaScript
 - Chart.js
 - Supabase
-- Git / GitHub
+- Git
+- GitHub
 - GitHub Pages
 
-## Banco de dados
+## Área administrativa
 
-A alteração de interface não modifica o schema ou os registros do Supabase. A aplicação continua usando a mesma configuração, tabelas, autenticação e políticas RLS já existentes.
+A aplicação possui uma área administrativa utilizada para atualização e gerenciamento das informações exibidas no dashboard.
 
-## Logo
+Entre as funcionalidades disponíveis estão:
 
-Adicione a logo em:
+- atualização dos dados;
+- edição de indicadores;
+- gerenciamento das informações das linhas;
+- cadastro de medições;
+- edição do gráfico de tendências;
+- gerenciamento do plano de ação;
+- personalização de títulos e descrições.
 
-```text
-img/logo.png
-```
+## Página pública
 
-Enquanto o arquivo não existir, a aplicação oculta automaticamente o espaço da imagem para evitar o ícone de imagem quebrada.
+A página pública permite consultar as informações do dashboard sem necessidade de autenticação.
 
+Ela apresenta os dados cadastrados através da área administrativa de forma organizada e visual.
 
-## Centralização do gráfico de tendências e plano de ação
+## Deploy
 
-O menu lateral agora inclui:
+O projeto pode ser publicado como aplicação estática através do **GitHub Pages**.
 
-- **Gráfico de tendências**: histórico de medições, cards de evolução e gerenciamento pelo admin.
-- **Plano de ação**: publicação de uma imagem pelo admin e visualização pública em destaque.
+## Objetivo do projeto
 
-Antes de usar essas duas seções, execute `supabase/migracao_centralizacao_dashboard.sql` no SQL Editor do Supabase principal.
+Centralizar o acompanhamento das notas de manutenção de embalagem em uma única aplicação, facilitando a visualização da situação atual, da evolução histórica e das ações relacionadas ao processo.
 
-Depois, no admin, acesse **Gráfico de tendências** e clique em **Importar dados do gráfico antigo**. A operação copia os registros do Supabase antigo para o Supabase do dashboard sem apagar o projeto de origem.
+A integração entre os indicadores atuais, o Gráfico de Tendências e o Plano de Ação permite uma visão mais completa e organizada das informações.
