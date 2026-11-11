@@ -63,15 +63,3 @@ Por ela é possível editar as informações das linhas, adicionar medições no
 ## Objetivo
 
 O objetivo do projeto é centralizar as informações de manutenção de embalagem em um único painel, deixando o acompanhamento mais simples e facilitando a visualização da situação atual e da evolução das notas ao longo do tempo.
-
-Ela apresenta os dados cadastrados através da área administrativa de forma organizada e visual.
-
-## Deploy
-
-O projeto pode ser publicado como aplicação estática através do **GitHub Pages**.
-
-## Objetivo do projeto
-
-Centralizar o acompanhamento das notas de manutenção de embalagem em uma única aplicação, facilitando a visualização da situação atual, da evolução histórica e das ações relacionadas ao processo.
-
-A integração entre os indicadores atuais, o Gráfico de Tendências e o Plano de Ação permite uma visão mais completa e organizada das informações.
