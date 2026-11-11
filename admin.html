@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/admin.css">
 </head>
 
-<body>
+<body class="auth-checking">
     <!-- CRIAR SENHA APÓS O CONVITE -->
     <div id="criarSenhaAdmin" class="login-admin oculto">
 
@@ -259,11 +259,15 @@
                         <span class="view-eyebrow">Painel</span>
                         <div class="editable-view-heading-row">
                             <h2 data-view-title="overview">Visão geral</h2>
-                            <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="overview" title="Editar título" aria-label="Editar título">✎</button>
+                            <button type="button" class="view-config-edit-btn admin-only"
+                                data-edit-view-title="overview" title="Editar título"
+                                aria-label="Editar título">✎</button>
                         </div>
                         <div class="editable-view-subtitle-row">
                             <p data-view-subtitle="overview">Resumo atual das notas de manutenção de embalagem.</p>
-                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only" data-edit-view-subtitle="overview" title="Editar subtítulo" aria-label="Editar subtítulo">✎</button>
+                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only"
+                                data-edit-view-subtitle="overview" title="Editar subtítulo"
+                                aria-label="Editar subtítulo">✎</button>
                         </div>
                     </div>
                 </div>
@@ -412,11 +416,16 @@
                     <div>
                         <div class="editable-view-heading-row">
                             <h2 data-view-title="distribution">Distribuição das notas por linha</h2>
-                            <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="distribution" title="Editar título" aria-label="Editar título">✎</button>
+                            <button type="button" class="view-config-edit-btn admin-only"
+                                data-edit-view-title="distribution" title="Editar título"
+                                aria-label="Editar título">✎</button>
                         </div>
                         <div class="editable-view-subtitle-row">
-                            <p class="view-config-subtitle chart-view-subtitle" data-view-subtitle="distribution">Visualize a distribuição das notas amarelas, vermelhas e ND por linha.</p>
-                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only" data-edit-view-subtitle="distribution" title="Editar subtítulo" aria-label="Editar subtítulo">✎</button>
+                            <p class="view-config-subtitle chart-view-subtitle" data-view-subtitle="distribution">
+                                Visualize a distribuição das notas amarelas, vermelhas e ND por linha.</p>
+                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only"
+                                data-edit-view-subtitle="distribution" title="Editar subtítulo"
+                                aria-label="Editar subtítulo">✎</button>
                         </div>
                     </div>
 
@@ -441,12 +450,16 @@
                     <span class="view-eyebrow">Análise</span>
                     <div class="editable-view-heading-row">
                         <h2 data-view-title="status">Situação por linha</h2>
-                        <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="status" title="Editar título" aria-label="Editar título">✎</button>
+                        <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="status"
+                            title="Editar título" aria-label="Editar título">✎</button>
                     </div>
                     <div class="editable-view-subtitle-row">
-                            <p data-view-subtitle="status">Escolha uma linha para visualizar seus indicadores e informações.</p>
-                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only" data-edit-view-subtitle="status" title="Editar subtítulo" aria-label="Editar subtítulo">✎</button>
-                        </div>
+                        <p data-view-subtitle="status">Escolha uma linha para visualizar seus indicadores e informações.
+                        </p>
+                        <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only"
+                            data-edit-view-subtitle="status" title="Editar subtítulo"
+                            aria-label="Editar subtítulo">✎</button>
+                    </div>
                     <div class="status-line-picker">
                         <label for="statusLineSelector">Linha</label>
                         <select id="statusLineSelector" aria-label="Selecionar linha">
@@ -529,12 +542,16 @@
 
                     <div class="editable-view-heading-row">
                         <h2 data-view-title="details">Detalhamento por linha</h2>
-                        <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="details" title="Editar título" aria-label="Editar título">✎</button>
+                        <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="details"
+                            title="Editar título" aria-label="Editar título">✎</button>
                     </div>
                     <div class="editable-view-subtitle-row">
-                            <p class="view-config-subtitle table-view-subtitle" data-view-subtitle="details">Consulte os valores de cada classificação em todas as linhas.</p>
-                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only" data-edit-view-subtitle="details" title="Editar subtítulo" aria-label="Editar subtítulo">✎</button>
-                        </div>
+                        <p class="view-config-subtitle table-view-subtitle" data-view-subtitle="details">Consulte os
+                            valores de cada classificação em todas as linhas.</p>
+                        <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only"
+                            data-edit-view-subtitle="details" title="Editar subtítulo"
+                            aria-label="Editar subtítulo">✎</button>
+                    </div>
 
                     <span class="admin-hint admin-only">
                         Clique na linha para alterar um valor
@@ -648,11 +665,15 @@
                         <span class="integration-kicker">ACOMPANHAMENTO HISTÓRICO</span>
                         <div class="editable-view-heading-row">
                             <h2 data-view-title="trends">Gráfico de tendências</h2>
-                            <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="trends" title="Editar título" aria-label="Editar título">✎</button>
+                            <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="trends"
+                                title="Editar título" aria-label="Editar título">✎</button>
                         </div>
                         <div class="editable-view-subtitle-row">
-                            <p data-view-subtitle="trends">Acompanhe a evolução das notas ao longo das medições registradas.</p>
-                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only" data-edit-view-subtitle="trends" title="Editar subtítulo" aria-label="Editar subtítulo">✎</button>
+                            <p data-view-subtitle="trends">Acompanhe a evolução das notas ao longo das medições
+                                registradas.</p>
+                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only"
+                                data-edit-view-subtitle="trends" title="Editar subtítulo"
+                                aria-label="Editar subtítulo">✎</button>
                         </div>
                     </div>
                     <div class="integration-actions">
@@ -664,28 +685,33 @@
 
                 <div class="trend-cards">
                     <article class="trend-card geral">
-                        <button class="trend-card-edit" type="button" data-trend-card="geral" title="Editar card">✎</button>
+                        <button class="trend-card-edit" type="button" data-trend-card="geral"
+                            title="Editar card">✎</button>
                         <span id="trendTitleGeral" class="trend-card-title">Meta</span>
                         <strong id="trendValueGeral" class="trend-card-value">—</strong>
-                        <small id="trendComplementGeral" class="trend-card-complement">para atingir a meta de 85%</small>
+                        <small id="trendComplementGeral" class="trend-card-complement">para atingir a meta de
+                            85%</small>
                         <span id="trendDetailGeral" class="trend-card-detail"></span>
                     </article>
                     <article class="trend-card amarela">
-                        <button class="trend-card-edit" type="button" data-trend-card="amarela" title="Editar card">✎</button>
+                        <button class="trend-card-edit" type="button" data-trend-card="amarela"
+                            title="Editar card">✎</button>
                         <span id="trendTitleAmarela" class="trend-card-title">Redução Notas Amarelas</span>
                         <strong id="trendValueAmarela" class="trend-card-value">—</strong>
                         <small id="trendComplementAmarela" class="trend-card-complement"></small>
                         <span id="trendDetailAmarela" class="trend-card-detail"></span>
                     </article>
                     <article class="trend-card vermelha">
-                        <button class="trend-card-edit" type="button" data-trend-card="vermelha" title="Editar card">✎</button>
+                        <button class="trend-card-edit" type="button" data-trend-card="vermelha"
+                            title="Editar card">✎</button>
                         <span id="trendTitleVermelha" class="trend-card-title">Redução Notas Vermelhas</span>
                         <strong id="trendValueVermelha" class="trend-card-value">—</strong>
                         <small id="trendComplementVermelha" class="trend-card-complement"></small>
                         <span id="trendDetailVermelha" class="trend-card-detail"></span>
                     </article>
                     <article class="trend-card nd">
-                        <button class="trend-card-edit" type="button" data-trend-card="nd" title="Editar card">✎</button>
+                        <button class="trend-card-edit" type="button" data-trend-card="nd"
+                            title="Editar card">✎</button>
                         <span id="trendTitleNd" class="trend-card-title">Redução Notas ND</span>
                         <strong id="trendValueNd" class="trend-card-value">—</strong>
                         <small id="trendComplementNd" class="trend-card-complement"></small>
@@ -710,7 +736,14 @@
                     <div class="trend-table-scroll">
                         <table class="trend-table">
                             <thead>
-                                <tr><th>Data</th><th>Amarela</th><th>Vermelha</th><th>ND</th><th>Total</th><th>Ações</th></tr>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Amarela</th>
+                                    <th>Vermelha</th>
+                                    <th>ND</th>
+                                    <th>Total</th>
+                                    <th>Ações</th>
+                                </tr>
                             </thead>
                             <tbody id="trendTableBody"></tbody>
                         </table>
@@ -725,11 +758,16 @@
                         <span class="integration-kicker">ACOMPANHAMENTO VISUAL</span>
                         <div class="editable-view-heading-row">
                             <h2 data-view-title="action-plan">Plano de ação</h2>
-                            <button type="button" class="view-config-edit-btn admin-only" data-edit-view-title="action-plan" title="Editar título" aria-label="Editar título">✎</button>
+                            <button type="button" class="view-config-edit-btn admin-only"
+                                data-edit-view-title="action-plan" title="Editar título"
+                                aria-label="Editar título">✎</button>
                         </div>
                         <div class="editable-view-subtitle-row">
-                            <p data-view-subtitle="action-plan">Visualização do plano de ação mais recente disponibilizado pela administração.</p>
-                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only" data-edit-view-subtitle="action-plan" title="Editar subtítulo" aria-label="Editar subtítulo">✎</button>
+                            <p data-view-subtitle="action-plan">Visualização do plano de ação mais recente
+                                disponibilizado pela administração.</p>
+                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only"
+                                data-edit-view-subtitle="action-plan" title="Editar subtítulo"
+                                aria-label="Editar subtítulo">✎</button>
                         </div>
                     </div>
                 </div>
@@ -742,9 +780,12 @@
                         </div>
                         <div class="action-plan-upload-actions">
                             <input id="actionPlanFile" type="file" accept="image/png,image/jpeg,image/webp" hidden>
-                            <button id="actionPlanChooseBtn" class="integration-btn secondary" type="button">Selecionar imagem</button>
-                            <button id="actionPlanUploadBtn" class="integration-btn primary" type="button" disabled>Publicar imagem</button>
-                            <button id="actionPlanRemoveBtn" class="integration-btn danger" type="button" hidden>Remover imagem</button>
+                            <button id="actionPlanChooseBtn" class="integration-btn secondary" type="button">Selecionar
+                                imagem</button>
+                            <button id="actionPlanUploadBtn" class="integration-btn primary" type="button"
+                                disabled>Publicar imagem</button>
+                            <button id="actionPlanRemoveBtn" class="integration-btn danger" type="button" hidden>Remover
+                                imagem</button>
                         </div>
                     </div>
                     <div id="actionPlanAdminNotice" class="integration-notice" hidden></div>

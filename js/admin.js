@@ -59,14 +59,27 @@
         }
 
         async function verificarAdmin() {
-            const { data: { session }, error } = await supabaseClient.auth.getSession();
+            const {
+                data: { session },
+                error
+            } = await supabaseClient.auth.getSession();
+
             if (error) {
                 console.error('Erro ao verificar sessão:', error);
                 usuarioAdmin = null;
                 return false;
             }
+
             usuarioAdmin = session?.user || null;
-            return Boolean(usuarioAdmin);
+
+            if (!usuarioAdmin) {
+                window.location.replace('login.html');
+                return false;
+            }
+
+            document.body.classList.remove('auth-checking');
+
+            return true;
         }
 
         async function iniciarAdmin() {

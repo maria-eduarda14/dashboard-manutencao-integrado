@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Administração - Manutenção</title>
   <link rel="stylesheet" href="css/admin.css">
 </head>
+
 <body class="standalone-auth-page">
   <main class="standalone-auth-wrap">
     <section class="standalone-auth-card">
@@ -22,8 +24,12 @@
           <label for="senha">Senha</label>
           <div class="standalone-password-field">
             <input id="senha" type="password" autocomplete="current-password" required>
-            <button class="standalone-password-toggle" type="button" data-target="senha" aria-label="Mostrar senha" title="Mostrar senha">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <button class="standalone-password-toggle" type="button" data-target="senha" aria-label="Mostrar senha"
+              title="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
             </button>
           </div>
         </div>
@@ -39,8 +45,12 @@
           <label for="cadastroSenha">Senha</label>
           <div class="standalone-password-field">
             <input id="cadastroSenha" type="password" autocomplete="new-password" minlength="8" required>
-            <button class="standalone-password-toggle" type="button" data-target="cadastroSenha" aria-label="Mostrar senha" title="Mostrar senha">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <button class="standalone-password-toggle" type="button" data-target="cadastroSenha"
+              aria-label="Mostrar senha" title="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
             </button>
           </div>
         </div>
@@ -48,8 +58,12 @@
           <label for="cadastroConfirmacao">Confirmar senha</label>
           <div class="standalone-password-field">
             <input id="cadastroConfirmacao" type="password" autocomplete="new-password" minlength="8" required>
-            <button class="standalone-password-toggle" type="button" data-target="cadastroConfirmacao" aria-label="Mostrar senha" title="Mostrar senha">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <button class="standalone-password-toggle" type="button" data-target="cadastroConfirmacao"
+              aria-label="Mostrar senha" title="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
             </button>
           </div>
         </div>
@@ -69,7 +83,8 @@
         <button type="button" class="standalone-auth-link" id="acaoRecuperar">Esqueceu sua senha?</button>
       </div>
 
-      <button type="button" class="standalone-auth-link standalone-back" id="voltarLogin" hidden>← Voltar ao login</button>
+      <button type="button" class="standalone-auth-link standalone-back" id="voltarLogin" hidden>← Voltar ao
+        login</button>
       <p class="standalone-public-link"><a href="index.html">← Voltar ao painel público</a></p>
     </section>
   </main>
@@ -78,4 +93,5 @@
   <script src="supabase/config.js"></script>
   <script src="js/login.js"></script>
 </body>
+
 </html>

@@ -10,6 +10,16 @@
             color: #333
         }
 
+        body.auth-checking .dashboard-shell,
+        body.auth-checking .dashboard-main,
+        body.auth-checking .dashboard-sidebar {
+            visibility: hidden;
+        }
+
+        body.auth-checking {
+            background: #f4f6f8;
+        }
+
         .container {
             max-width: 1400px;
             margin: auto;
