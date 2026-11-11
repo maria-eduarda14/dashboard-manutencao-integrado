@@ -40,14 +40,24 @@
 
         function atualizarUsuarioCabecalho() {
             const elemento = document.getElementById('adminUserName');
+
             if (!elemento) return;
+
             if (!usuarioAdmin) {
                 elemento.textContent = 'Administrador';
                 return;
             }
 
             const metadata = usuarioAdmin.user_metadata || {};
-            const nome = metadata.nome || metadata.full_name || metadata.name || usuarioAdmin.email || 'Administrador';
+
+            const nome =
+                metadata.nome ||
+                metadata.display_name ||
+                metadata.full_name ||
+                metadata.name ||
+                usuarioAdmin.email ||
+                'Administrador';
+
             elemento.textContent = nome;
         }
 
