@@ -270,6 +270,10 @@
                                 aria-label="Editar subtítulo">✎</button>
                         </div>
                     </div>
+                    <div class="dashboard-update-status" aria-live="polite">
+                        <span class="dashboard-update-dot"></span>
+                        <span>Última atualização: <strong id="dashboardLastUpdated">—</strong></span>
+                    </div>
                 </div>
 
                 <div class="cards overview-kpis">
@@ -719,6 +723,29 @@
                     </article>
                 </div>
 
+                <!-- FILTRO DO GRÁFICO DE TENDÊNCIAS -->
+                <div class="trend-toolbar">
+                    <div class="trend-filter-group">
+                        <label for="trendPeriodFilter">
+                            Período do gráfico
+                        </label>
+                        <select id="trendPeriodFilter" class="trend-period-select">
+                            <option value="all">Todo o período</option>
+                            <option value="30">Últimos 30 dias</option>
+                            <option value="90">Últimos 3 meses</option>
+                            <option value="180">Últimos 6 meses</option>
+                            <option value="365">Últimos 12 meses</option>
+                        </select>
+                    </div>
+
+                    <div class="trend-toolbar-actions">
+                        <span id="trendFilterSummary" class="trend-filter-summary"></span>
+                        <button id="trendExportBtn" class="integration-btn secondary trend-export-btn" type="button">
+                            Exportar CSV
+                        </button>
+                    </div>
+                </div>
+
                 <div class="trend-chart-panel">
                     <div id="trendEmpty" class="integration-empty" hidden>Nenhuma medição cadastrada.</div>
                     <div class="trend-chart-wrapper">
@@ -805,6 +832,7 @@
     <script src="supabase/config.js"></script>
     <script src="js/ui-dialog.js"></script>
     <script src="js/admin.js"></script>
+    <script src="js/dashboard-status.js"></script>
     <script src="js/integrations.js"></script>
     <script src="js/view-config.js"></script>
     <script src="js/navigation.js"></script>

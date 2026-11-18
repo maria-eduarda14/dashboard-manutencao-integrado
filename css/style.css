@@ -1476,7 +1476,7 @@ body {
 .view-heading p { margin:0; color:#71808e; font-size:13px; }
 .view-eyebrow { color:#3498db; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1px; }
 
-.status-view-intro { padding:22px 22px 0; }
+.status-view-intro { padding:22px 22px 22px; }
 .status-view-intro h2 { margin:4px 0 6px; font-size:20px; color:#1d2a36; }
 .status-view-intro p { margin:0; color:#7b8791; font-size:12px; }
 
@@ -2909,4 +2909,116 @@ body.dialog-open { overflow: hidden; }
     outline: 1px solid #d7dde2;
     outline-offset: -1px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+}
+
+/* =========================================================
+   MELHORIAS — ATUALIZAÇÃO, ATENÇÃO E TENDÊNCIAS
+   ========================================================= */
+.dashboard-update-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 9px;
+    color: #74818c;
+    font-size: 12px;
+}
+.dashboard-update-status strong { color: #4c5d69; font-weight: 750; }
+.dashboard-update-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2e9d63;
+    box-shadow: 0 0 0 3px rgba(46,157,99,.10);
+}
+.dashboard-update-status.unavailable .dashboard-update-dot { background: #a9b1b7; box-shadow: none; }
+
+.overview-attention-panel { margin-bottom: 18px; }
+.overview-attention-list { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.overview-attention-item {
+    display: grid;
+    grid-template-columns: 34px minmax(0,1fr) auto;
+    align-items: center;
+    gap: 11px;
+    padding: 14px;
+    border: 1px solid #e5eaee;
+    border-radius: 10px;
+    background: #fbfcfd;
+}
+.overview-attention-rank {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #eef4f8;
+    color: #5e7180;
+    font-size: 12px;
+    font-weight: 800;
+}
+.overview-attention-info { min-width: 0; }
+.overview-attention-info strong { display:block; color:#263746; font-size:14px; }
+.overview-attention-info span { display:block; margin-top:3px; color:#88959f; font-size:11px; }
+.overview-attention-badge {
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #fff7dc;
+    color: #8a6b00;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+.overview-attention-badge.critical { background:#fff0ef; color:#c33d35; }
+.overview-attention-empty { grid-column:1/-1; padding:16px; color:#82909b; text-align:center; font-size:12px; }
+
+.trend-card-previous {
+    display: block;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #edf0f2;
+    color: #77848e;
+    font-size: 11px;
+    font-weight: 700;
+}
+.trend-card-previous.good { color:#218c55; }
+.trend-card-previous.bad { color:#d3483f; }
+.trend-card-previous.neutral { color:#7c8790; }
+
+.trend-toolbar {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    border: 1px solid #e2e7eb;
+    border-radius: 10px;
+    background: #fbfcfd;
+}
+.trend-filter-group { display:grid; gap:5px; }
+.trend-filter-group label { color:#6f7d87; font-size:11px; font-weight:750; }
+.trend-period-select {
+    min-width: 185px;
+    height: 36px;
+    padding: 0 34px 0 10px;
+    border: 1px solid #d5dde3;
+    border-radius: 8px;
+    background: #fff;
+    color: #334654;
+    font-size: 12px;
+}
+.trend-toolbar-actions { display:flex; align-items:center; gap:12px; }
+.trend-filter-summary { color:#7d8992; font-size:11px; }
+.trend-export-btn { min-height:36px; }
+
+@media (max-width: 900px) {
+    .overview-attention-list { grid-template-columns: 1fr; }
+    .trend-toolbar { align-items: stretch; flex-direction: column; }
+    .trend-toolbar-actions { justify-content: space-between; }
+}
+@media (max-width: 520px) {
+    .overview-attention-item { grid-template-columns: 30px minmax(0,1fr); }
+    .overview-attention-badge { grid-column: 2; justify-self: start; }
+    .trend-toolbar-actions { align-items: stretch; flex-direction: column; }
+    .trend-period-select { width:100%; }
 }

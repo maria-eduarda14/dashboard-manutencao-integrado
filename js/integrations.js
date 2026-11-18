@@ -47,6 +47,7 @@
     let trendChart = null;
     let actionPlanPreviewUrl = null;
     let trendCardConfig = structuredClone(CARD_DEFAULTS);
+    let trendPeriodDays = 'all';
 
     const $ = id => document.getElementById(id);
     const number = value => Number(value || 0);
@@ -92,24 +93,119 @@
         return { percentage, reductions, accumulated, additions };
     }
 
-    function setAccumulatedEvolution(valueId, detailId, values) {
+    function setFirstLastEvolution(valueId, detailId, values) {
         const valueEl = $(valueId);
         const detailEl = $(detailId);
         if (!valueEl || !detailEl) return;
 
-        const result = accumulatedReduction(values);
+        const initial = number(values?.[0]);
+        const current = number(values?.[values.length - 1]);
+        const percentage = values?.length ? evolution(initial, current) : null;
+
         valueEl.classList.remove('good', 'bad', 'neutral');
 
-        if (result.percentage === null) {
+        if (percentage === null) {
             valueEl.textContent = 'Não calculável';
             valueEl.classList.add('neutral');
             detailEl.textContent = 'Sem base suficiente para cálculo';
             return;
         }
 
-        valueEl.textContent = `↓ ${pct(result.percentage)}`;
-        valueEl.classList.add(result.percentage > 0 ? 'good' : 'neutral');
-        detailEl.textContent = `${result.reductions} notas reduzidas de ${result.accumulated} totalizadas`;
+        const arrow = percentage > 0 ? '↓' : percentage < 0 ? '↑' : '→';
+        valueEl.textContent = `${arrow} ${pct(Math.abs(percentage))}`;
+        valueEl.classList.add(percentage > 0 ? 'good' : percentage < 0 ? 'bad' : 'neutral');
+        detailEl.textContent = `De ${initial} notas para ${current} notas`;
+    }
+
+    function filteredTrendRecords() {
+        if (
+            trendPeriodDays === 'all' ||
+            !trendRecords.length
+        ) {
+            return [...trendRecords];
+        }
+
+        const days = Number(trendPeriodDays);
+
+        if (!Number.isFinite(days) || days <= 0) {
+            return [...trendRecords];
+        }
+
+        const latestRecord = trendRecords[trendRecords.length - 1];
+
+        const latestDate = new Date(
+            `${latestRecord.data}T12:00:00`
+        );
+
+        const cutoffDate = new Date(latestDate);
+
+        cutoffDate.setDate(
+            cutoffDate.getDate() - days
+        );
+
+        return trendRecords.filter(record => {
+            const recordDate = new Date(
+                `${record.data}T12:00:00`
+            );
+
+            return recordDate >= cutoffDate;
+        });
+    }
+
+
+    function updateTrendFilterSummary(records) {
+        const el = $('trendFilterSummary');
+        if (!el) return;
+
+        if (!records.length) {
+            el.textContent = 'Nenhuma medição no período';
+            return;
+        }
+
+        const first = brDate(records[0].data);
+        const last = brDate(records[records.length - 1].data);
+
+        el.textContent = records.length === 1
+            ? `1 medição · ${last}`
+            : `${records.length} medições · ${first} a ${last}`;
+    }
+
+    function exportTrendCsv() {
+        const records = filteredTrendRecords();
+
+        if (!records.length) {
+            showTrendNotice('Não há medições para exportar neste período.', 'error');
+            return;
+        }
+
+        const rows = [
+            ['Data', 'Amarela', 'Vermelha', 'ND', 'Total'],
+            ...records.map(record => {
+                const total = number(record.amarela) + number(record.vermelha) + number(record.nd);
+                return [
+                    brDate(record.data),
+                    number(record.amarela),
+                    number(record.vermelha),
+                    number(record.nd),
+                    total
+                ];
+            })
+        ];
+
+        const csv = '\ufeff' + rows
+            .map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(';'))
+            .join('\r\n');
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+
+        link.href = url;
+        link.download = `tendencias-notas-${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
     }
 
     function completionMeta(records, meta = 85) {
@@ -184,10 +280,13 @@
                 if (value) value.textContent = '—';
                 if (detail) detail.textContent = 'Sem dados cadastrados';
             });
+
             if (trendChart) {
                 trendChart.destroy();
                 trendChart = null;
             }
+
+            updateTrendFilterSummary([]);
             renderTrendTable();
             return;
         }
@@ -195,20 +294,28 @@
         const yellow = trendRecords.map(r => number(r.amarela));
         const red = trendRecords.map(r => number(r.vermelha));
         const nd = trendRecords.map(r => number(r.nd));
-        const totals = trendRecords.map((r, i) => yellow[i] + red[i] + nd[i]);
 
         const missing = completionMeta(trendRecords);
         const metaValue = $('trendValueGeral');
         const metaDetail = $('trendDetailGeral');
+
         if (metaValue) {
             metaValue.textContent = missing === null ? 'Não calculável' : pct(missing);
             metaValue.className = `trend-card-value ${missing === 0 ? 'good' : 'neutral'}`;
         }
         if (metaDetail) metaDetail.textContent = '';
 
-        setAccumulatedEvolution('trendValueAmarela', 'trendDetailAmarela', yellow);
-        setAccumulatedEvolution('trendValueVermelha', 'trendDetailVermelha', red);
-        setAccumulatedEvolution('trendValueNd', 'trendDetailNd', nd);
+        setFirstLastEvolution('trendValueAmarela', 'trendDetailAmarela', yellow);
+        setFirstLastEvolution('trendValueVermelha', 'trendDetailVermelha', red);
+        setFirstLastEvolution('trendValueNd', 'trendDetailNd', nd);
+
+        const visibleRecords = filteredTrendRecords();
+        const visibleYellow = visibleRecords.map(r => number(r.amarela));
+        const visibleRed = visibleRecords.map(r => number(r.vermelha));
+        const visibleNd = visibleRecords.map(r => number(r.nd));
+        const visibleTotals = visibleRecords.map((r, i) => visibleYellow[i] + visibleRed[i] + visibleNd[i]);
+
+        updateTrendFilterSummary(visibleRecords);
 
         const canvas = $('trendChart');
         if (canvas && window.Chart) {
@@ -218,12 +325,12 @@
                 plugins: [trendValueLabelsPlugin],
                 type: 'bar',
                 data: {
-                    labels: trendRecords.map(r => brDate(r.data)),
+                    labels: visibleRecords.map(r => brDate(r.data)),
                     datasets: [
                         {
                             type: 'line',
                             label: 'Linha de Tendência',
-                            data: totals,
+                            data: visibleTotals,
                             borderColor: '#d93025',
                             backgroundColor: '#d93025',
                             borderWidth: 3,
@@ -234,9 +341,9 @@
                             fill: false,
                             order: 0
                         },
-                        trendBar('Amarela', yellow, '#f4c20d'),
-                        trendBar('Vermelha', red, '#e74c3c'),
-                        trendBar('ND', nd, '#879295')
+                        trendBar('Amarela', visibleYellow, '#f4c20d'),
+                        trendBar('Vermelha', visibleRed, '#e74c3c'),
+                        trendBar('ND', visibleNd, '#879295')
                     ]
                 },
                 options: {
@@ -251,7 +358,7 @@
                         tooltip: {
                             callbacks: {
                                 footer(items) {
-                                    return `Total: ${totals[items[0].dataIndex]}`;
+                                    return `Total: ${visibleTotals[items[0].dataIndex]}`;
                                 }
                             }
                         }
@@ -652,6 +759,20 @@
         await loadActionPlan();
     }
 
+    function bindTrendTools() {
+        const filter = $('trendPeriodFilter');
+
+        if (filter) {
+            filter.value = trendPeriodDays;
+            filter.addEventListener('change', () => {
+                trendPeriodDays = filter.value || 'all';
+                renderTrend();
+            });
+        }
+
+        $('trendExportBtn')?.addEventListener('click', exportTrendCsv);
+    }
+
     function bindAdmin() {
         if (!IS_ADMIN) return;
 
@@ -695,6 +816,7 @@
     }
 
     async function init() {
+        bindTrendTools();
         bindAdmin();
 
         try {
