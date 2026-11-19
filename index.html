@@ -82,6 +82,9 @@
 
                 <span class="sidebar-label">Entrar</span>
             </a>
+            <div class="sidebar-version">
+                <span>v1.0.0</span>
+            </div>
         </div>
     </aside>
     <div id="sidebarBackdrop" class="sidebar-backdrop" aria-hidden="true"></div>
@@ -234,6 +237,48 @@
                     </div>
                 </section>
 
+                <section class="overview-panel overview-recent-panel">
+                    <div class="overview-panel-header overview-recent-header">
+                        <div>
+                            <span class="overview-panel-kicker">Evolução recente</span>
+                            <h3>Maiores variações desde a última medição</h3>
+                            <p>Compara as duas medições mais recentes e destaca o que aumentou ou reduziu no período.
+                            </p>
+                        </div>
+                        <button type="button" class="overview-link-button" data-go-view="trends">Ver tendências</button>
+                    </div>
+
+                    <div class="overview-recent-grid">
+                        <article class="overview-recent-card">
+                            <div class="overview-recent-top">
+                                <span class="overview-recent-label"><i class="overview-recent-dot red"></i>Notas
+                                    Vermelhas</span>
+                                <strong id="recentVermelhaVariation"
+                                    class="overview-recent-variation neutral">—</strong>
+                            </div>
+                            <small id="recentVermelhaDetail">Aguardando medições</small>
+                        </article>
+
+                        <article class="overview-recent-card">
+                            <div class="overview-recent-top">
+                                <span class="overview-recent-label"><i class="overview-recent-dot nd"></i>Notas
+                                    ND</span>
+                                <strong id="recentNdVariation" class="overview-recent-variation neutral">—</strong>
+                            </div>
+                            <small id="recentNdDetail">Aguardando medições</small>
+                        </article>
+
+                        <article class="overview-recent-card">
+                            <div class="overview-recent-top">
+                                <span class="overview-recent-label"><i class="overview-recent-dot yellow"></i>Notas
+                                    Amarelas</span>
+                                <strong id="recentAmarelaVariation" class="overview-recent-variation neutral">—</strong>
+                            </div>
+                            <small id="recentAmarelaDetail">Aguardando medições</small>
+                        </article>
+                    </div>
+                </section>
+
                 <div class="overview-shortcuts">
                     <button type="button" class="overview-shortcut" data-go-view="distribution">
                         <span class="overview-shortcut-icon">▥</span>
@@ -258,9 +303,7 @@
              GRÁFICO
         ========================================== -->
             <section class="chart-container dashboard-view" data-dashboard-view="distribution">
-
                 <div class="chart-header">
-
                     <div>
                         <div class="editable-view-heading-row">
                             <h2 data-view-title="distribution">Distribuição das notas por linha</h2>
@@ -268,17 +311,13 @@
                         <p class="view-config-subtitle chart-view-subtitle" data-view-subtitle="distribution">Visualize
                             a distribuição das notas amarelas, vermelhas e ND por linha.</p>
                     </div>
-
                     <div class="admin-hint admin-only">
                         Selecione uma linha para editar seus dados
                     </div>
-
                 </div>
-
                 <div class="chart-wrapper">
                     <canvas id="notasChart"></canvas>
                 </div>
-
             </section>
 
 
@@ -321,7 +360,6 @@
                             <button id="removerMelhoria" type="button" class="card-action-btn danger"
                                 aria-label="Remover card de melhoria" title="Remover">×</button>
                         </div>
-
                         <span id="melhoriaTituloLinha" class="resumo-label">Melhoria desde o início</span>
                         <span id="melhoriaLinha" class="resumo-value melhoria-value">—</span>
                         <span id="comparacaoBaseLinha" class="resumo-sub">Base não definida</span>
@@ -334,7 +372,6 @@
                             <button id="removerResumoPrincipal" type="button" class="card-action-btn danger"
                                 aria-label="Remover indicador principal" title="Remover">×</button>
                         </div>
-
                         <span id="resumoTituloLinha" class="resumo-label">Vencidas</span>
                         <span id="resumoValorLinha" class="resumo-value">0</span>
                         <span class="resumo-sub">indicador da linha</span>
@@ -358,20 +395,16 @@
                                 reavaliações ou outros status relevantes.
                             </div>
                         </div>
-
                         <button id="btnAdicionarInformacao" type="button" class="add-info-btn admin-only">
                             + Adicionar informação
                         </button>
                     </div>
-
                     <div id="informacoesAdicionaisLista" class="info-adicional-lista"></div>
                 </div>
             </section>
 
             <section class="table-container dashboard-view" data-dashboard-view="details">
-
                 <div class="table-header">
-
                     <div class="editable-view-heading-row">
                         <h2 data-view-title="details">Detalhamento por linha</h2>
                     </div>
@@ -381,16 +414,12 @@
                     <span class="admin-hint admin-only">
                         Clique na linha para alterar um valor
                     </span>
-
                 </div>
 
-
                 <table>
-
                     <thead>
                         <tr>
                             <th>Classificação</th>
-
                             <th>Linha 1</th>
                             <th>Linha 2</th>
                             <th>Linha 3</th>
@@ -405,18 +434,14 @@
                         </tr>
                     </thead>
 
-
                     <!-- O JavaScript poderá preencher daqui para frente -->
                     <tbody id="detalhamentoBody">
-
                         <tr id="rowAmarela">
-
                             <td>
                                 <span class="badge badge-yellow">
                                     Amarela
                                 </span>
                             </td>
-
                             <td data-linha="Linha 1" data-field="amarela">0</td>
                             <td data-linha="Linha 2" data-field="amarela">0</td>
                             <td data-linha="Linha 3" data-field="amarela">0</td>
@@ -431,15 +456,12 @@
 
                         </tr>
 
-
                         <tr id="rowVermelha">
-
                             <td>
                                 <span class="badge badge-red">
                                     Vermelha
                                 </span>
                             </td>
-
                             <td data-linha="Linha 1" data-field="vermelha">0</td>
                             <td data-linha="Linha 2" data-field="vermelha">0</td>
                             <td data-linha="Linha 3" data-field="vermelha">0</td>
@@ -451,18 +473,14 @@
                             <td data-linha="Linha 9" data-field="vermelha">0</td>
                             <td data-linha="Linha 10" data-field="vermelha">0</td>
                             <td data-linha="Linha 14" data-field="vermelha">0</td>
-
                         </tr>
 
-
                         <tr id="rowNd">
-
                             <td>
                                 <span class="badge badge-gray">
                                     ND
                                 </span>
                             </td>
-
                             <td data-linha="Linha 1" data-field="nd">0</td>
                             <td data-linha="Linha 2" data-field="nd">0</td>
                             <td data-linha="Linha 3" data-field="nd">0</td>
@@ -474,15 +492,10 @@
                             <td data-linha="Linha 9" data-field="nd">0</td>
                             <td data-linha="Linha 10" data-field="nd">0</td>
                             <td data-linha="Linha 14" data-field="nd">0</td>
-
                         </tr>
-
                     </tbody>
-
                 </table>
-
             </section>
-
 
             <section class="dashboard-view integration-view" data-dashboard-view="trends">
                 <div class="integration-heading">
@@ -534,6 +547,7 @@
                         </label>
                         <select id="trendPeriodFilter" class="trend-period-select">
                             <option value="all">Todo o período</option>
+                            <option value="15">Últimos 15 dias</option>
                             <option value="30">Últimos 30 dias</option>
                             <option value="90">Últimos 3 meses</option>
                             <option value="180">Últimos 6 meses</option>
@@ -577,7 +591,6 @@
                     <img id="actionPlanImage" class="action-plan-image" alt="Plano de ação" hidden>
                 </div>
             </section>
-
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

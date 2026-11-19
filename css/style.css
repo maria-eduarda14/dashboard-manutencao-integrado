@@ -1437,6 +1437,23 @@ body {
     border-top: 1px solid rgba(255,255,255,.08);
 }
 
+.sidebar-version {
+    margin-top: 8px;
+    color: var(--sidebar-muted);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .3px;
+    white-space: nowrap;
+}
+
+.dashboard-sidebar:not(:hover):not(.pinned-open) .sidebar-version {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
 .sidebar-user {
     display:flex;
     align-items:center;
@@ -2971,6 +2988,58 @@ body.dialog-open { overflow: hidden; }
 .overview-attention-badge.critical { background:#fff0ef; color:#c33d35; }
 .overview-attention-empty { grid-column:1/-1; padding:16px; color:#82909b; text-align:center; font-size:12px; }
 
+.overview-recent-panel { margin-bottom: 18px; }
+.overview-recent-header { align-items: flex-start; }
+.overview-recent-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+}
+.overview-recent-card {
+    padding: 14px;
+    border: 1px solid #dfe5e9;
+    border-radius: 12px;
+    background: #fff;
+}
+.overview-recent-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.overview-recent-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #283846;
+    font-size: 15px;
+    font-weight: 800;
+}
+.overview-recent-dot {
+    width: 9px;
+    height: 9px;
+    flex: 0 0 9px;
+    border-radius: 50%;
+}
+.overview-recent-dot.red { background: #eb5148; }
+.overview-recent-dot.nd { background: #88969b; }
+.overview-recent-dot.yellow { background: #e7b800; }
+.overview-recent-variation {
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 850;
+}
+.overview-recent-variation.good { color: #15824d; }
+.overview-recent-variation.bad { color: #cf352c; }
+.overview-recent-variation.neutral { color: #7d8992; }
+.overview-recent-card small {
+    display: block;
+    margin-top: 10px;
+    color: #7d8b96;
+    font-size: 13px;
+}
+
 .trend-card-previous {
     display: block;
     margin-top: 8px;
@@ -3013,6 +3082,7 @@ body.dialog-open { overflow: hidden; }
 
 @media (max-width: 900px) {
     .overview-attention-list { grid-template-columns: 1fr; }
+    .overview-recent-grid { grid-template-columns: 1fr; }
     .trend-toolbar { align-items: stretch; flex-direction: column; }
     .trend-toolbar-actions { justify-content: space-between; }
 }

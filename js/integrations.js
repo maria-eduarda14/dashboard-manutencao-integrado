@@ -208,6 +208,49 @@
         URL.revokeObjectURL(url);
     }
 
+    function renderRecentEvolution() {
+        const fields = [
+            { key: 'vermelha', valueId: 'recentVermelhaVariation', detailId: 'recentVermelhaDetail' },
+            { key: 'nd', valueId: 'recentNdVariation', detailId: 'recentNdDetail' },
+            { key: 'amarela', valueId: 'recentAmarelaVariation', detailId: 'recentAmarelaDetail' }
+        ];
+
+        if (trendRecords.length < 2) {
+            fields.forEach(({ valueId, detailId }) => {
+                const valueEl = $(valueId);
+                const detailEl = $(detailId);
+                if (valueEl) {
+                    valueEl.textContent = '—';
+                    valueEl.className = 'overview-recent-variation neutral';
+                }
+                if (detailEl) detailEl.textContent = 'São necessárias pelo menos duas medições';
+            });
+            return;
+        }
+
+        const previous = trendRecords[trendRecords.length - 2];
+        const current = trendRecords[trendRecords.length - 1];
+
+        fields.forEach(({ key, valueId, detailId }) => {
+            const previousValue = number(previous[key]);
+            const currentValue = number(current[key]);
+            const difference = currentValue - previousValue;
+            const valueEl = $(valueId);
+            const detailEl = $(detailId);
+
+            if (valueEl) {
+                const arrow = difference < 0 ? '↓' : difference > 0 ? '↑' : '→';
+                const sign = difference > 0 ? '+' : '';
+                valueEl.textContent = `${arrow} ${sign}${difference} ${Math.abs(difference) === 1 ? 'nota' : 'notas'}`;
+                valueEl.className = `overview-recent-variation ${difference < 0 ? 'good' : difference > 0 ? 'bad' : 'neutral'}`;
+            }
+
+            if (detailEl) {
+                detailEl.textContent = `${previousValue} → ${currentValue} na última medição`;
+            }
+        });
+    }
+
     function completionMeta(records, meta = 85) {
         if (!records.length) return null;
         const totals = records.map(r => number(r.amarela) + number(r.vermelha) + number(r.nd));
@@ -269,6 +312,7 @@
 
     function renderTrend() {
         applyCardConfig();
+        renderRecentEvolution();
 
         const empty = $('trendEmpty');
         if (empty) empty.hidden = trendRecords.length > 0;

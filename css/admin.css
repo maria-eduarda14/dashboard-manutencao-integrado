@@ -1668,6 +1668,24 @@ body {
     border-top: 1px solid rgba(255,255,255,.08);
 }
 
+.sidebar-version {
+    margin-top: 6px;
+    margin-bottom: 10px;
+    color: var(--sidebar-muted);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .3px;
+    white-space: nowrap;
+}
+
+.dashboard-sidebar:not(:hover):not(.pinned-open) .sidebar-version {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
 .sidebar-user {
     display:flex;
     align-items:center;
