@@ -2,7 +2,7 @@
 
 Projeto desenvolvido para facilitar o acompanhamento das notas de manutenção de embalagem de forma mais visual e organizada.
 
-A ideia principal é reunir em um só lugar as informações das linhas, os indicadores atuais, o histórico das medições e também o plano de ação.
+A ideia principal é reunir em um só lugar as informações das linhas, os indicadores atuais e o histórico das medições.
 
 ## O que tem no sistema
 
@@ -14,7 +14,6 @@ A ideia principal é reunir em um só lugar as informações das linhas, os indi
 - Gráfico de tendências com o histórico das medições.
 - Indicadores de redução ao longo do período.
 - Acompanhamento da meta de redução.
-- Plano de ação com imagem.
 - Área administrativa para atualização das informações.
 - Edição de títulos, indicadores e outros dados exibidos no painel.
 
@@ -24,11 +23,6 @@ O gráfico de tendências foi integrado ao dashboard para permitir acompanhar me
 
 Além das medições, também são exibidos indicadores de redução das notas Amarelas, Vermelhas e ND, considerando as movimentações realizadas durante o período.
 
-## Plano de ação
-
-Também foi adicionada uma área para o plano de ação.
-
-Pela área administrativa é possível selecionar uma imagem, visualizar antes de publicar e depois disponibilizá-la na página pública.
 
 ## Tecnologias utilizadas
 
@@ -58,7 +52,7 @@ Pela área administrativa é possível selecionar uma imagem, visualizar antes d
 
 O sistema possui uma área administrativa para atualização dos dados exibidos no dashboard.
 
-Por ela é possível editar as informações das linhas, adicionar medições no gráfico de tendências, alterar alguns textos do painel e atualizar o plano de ação.
+Por ela é possível editar as informações das linhas, adicionar medições no gráfico de tendências e alterar textos e indicadores do painel.
 
 ## Objetivo
 

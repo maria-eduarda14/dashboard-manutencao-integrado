@@ -43,7 +43,6 @@ begin
         'painel_notas_info',
         'tendencia_notas',
         'dashboard_card_config',
-        'plano_acao',
         'dashboard_view_config'
     ]
     loop

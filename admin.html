@@ -204,15 +204,7 @@
                     </svg></span>
                 <span class="sidebar-label">Gráfico de tendências</span>
             </button>
-            <button class="sidebar-link" type="button" data-view-target="action-plan">
-                <span class="sidebar-icon"><svg viewBox="0 0 24 24" aria-hidden="true">
-                        <rect x="4" y="3" width="16" height="18" rx="2" />
-                        <path d="M8 8h8M8 12h8M8 16h5" />
-                    </svg></span>
-                <span class="sidebar-label">Plano de ação</span>
-            </button>
-
-        </nav>
+</nav>
 
         <div class="sidebar-footer admin-only">
             <div id="adminUserArea" class="sidebar-user admin-user-area">
@@ -782,55 +774,7 @@
                     <div id="trendTableEmpty" class="integration-empty" hidden>Nenhuma medição cadastrada.</div>
                 </div>
             </section>
-
-            <section class="dashboard-view integration-view" data-dashboard-view="action-plan">
-                <div class="integration-heading">
-                    <div>
-                        <span class="integration-kicker">ACOMPANHAMENTO VISUAL</span>
-                        <div class="editable-view-heading-row">
-                            <h2 data-view-title="action-plan">Plano de ação</h2>
-                            <button type="button" class="view-config-edit-btn admin-only"
-                                data-edit-view-title="action-plan" title="Editar título"
-                                aria-label="Editar título">✎</button>
-                        </div>
-                        <div class="editable-view-subtitle-row">
-                            <p data-view-subtitle="action-plan">Visualização do plano de ação mais recente
-                                disponibilizado pela administração.</p>
-                            <button type="button" class="view-config-edit-btn view-config-subtitle-edit admin-only"
-                                data-edit-view-subtitle="action-plan" title="Editar subtítulo"
-                                aria-label="Editar subtítulo">✎</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="action-plan-admin-panel">
-                    <div class="action-plan-upload-row">
-                        <div>
-                            <h3>Imagem do plano de ação</h3>
-                            <p>Use PNG, JPG, JPEG ou WEBP. Uma nova imagem substitui a visualização atual.</p>
-                        </div>
-                        <div class="action-plan-upload-actions">
-                            <input id="actionPlanFile" type="file" accept="image/png,image/jpeg,image/webp" hidden>
-                            <button id="actionPlanChooseBtn" class="integration-btn secondary" type="button">Selecionar
-                                imagem</button>
-                            <button id="actionPlanUploadBtn" class="integration-btn primary" type="button"
-                                disabled>Publicar imagem</button>
-                            <button id="actionPlanRemoveBtn" class="integration-btn danger" type="button" hidden>Remover
-                                imagem</button>
-                        </div>
-                    </div>
-                    <div id="actionPlanAdminNotice" class="integration-notice" hidden></div>
-                    <div id="actionPlanAdminState" class="action-plan-stage">
-                        <div id="actionPlanEmpty" class="action-plan-empty">
-                            <strong>Não há imagem a ser exibida</strong>
-                            <span>Selecione uma imagem acima para publicar o plano de ação.</span>
-                        </div>
-                        <img id="actionPlanImage" class="action-plan-image" alt="Plano de ação" hidden>
-                    </div>
-                </div>
-            </section>
-
-        </div>
+</div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase/config.js"></script>

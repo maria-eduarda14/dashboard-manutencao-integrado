@@ -11,8 +11,7 @@ create table if not exists public.dashboard_view_config (
             'distribution',
             'status',
             'details',
-            'trends',
-            'action-plan'
+            'trends'
         )
     ),
     titulo text not null check (char_length(btrim(titulo)) between 1 and 100),
@@ -49,6 +48,5 @@ insert into public.dashboard_view_config (view_key, titulo, subtitulo) values
     ('distribution', 'Distribuição das notas por linha', 'Visualize a distribuição das notas amarelas, vermelhas e ND por linha.'),
     ('status', 'Situação por linha', 'Escolha uma linha para visualizar seus indicadores e informações.'),
     ('details', 'Detalhamento por linha', 'Consulte os valores de cada classificação em todas as linhas.'),
-    ('trends', 'Gráfico de tendências', 'Acompanhe a evolução das notas ao longo das medições registradas.'),
-    ('action-plan', 'Plano de ação', 'Visualização do plano de ação mais recente disponibilizado pela administração.')
+    ('trends', 'Gráfico de tendências', 'Acompanhe a evolução das notas ao longo das medições registradas.')
 on conflict (view_key) do nothing;

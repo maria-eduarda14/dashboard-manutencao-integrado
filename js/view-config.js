@@ -19,10 +19,6 @@
         trends: {
             titulo: 'Gráfico de tendências',
             subtitulo: 'Acompanhe a evolução das notas ao longo das medições registradas.'
-        },
-        'action-plan': {
-            titulo: 'Plano de ação',
-            subtitulo: 'Visualização do plano de ação mais recente disponibilizado pela administração.'
         }
     };
 
@@ -31,8 +27,7 @@
         distribution: 'Distribuição',
         status: 'Situação por linha',
         details: 'Detalhamento',
-        trends: 'Gráfico de tendências',
-        'action-plan': 'Plano de ação'
+        trends: 'Gráfico de tendências'
     };
 
     const config = structuredClone(DEFAULTS);

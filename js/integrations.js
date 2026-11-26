@@ -45,7 +45,6 @@
 
     let trendRecords = [];
     let trendChart = null;
-    let actionPlanPreviewUrl = null;
     let trendCardConfig = structuredClone(CARD_DEFAULTS);
     let trendPeriodDays = 'all';
 
@@ -638,170 +637,6 @@
         }
     }
 
-    async function loadActionPlan() {
-        const { data, error } = await supabaseClient
-            .from('plano_acao')
-            .select('id,image_path,updated_at')
-            .eq('id', 1)
-            .maybeSingle();
-
-        if (error) {
-            console.error('Erro ao carregar plano de ação:', error);
-            return;
-        }
-
-        const image = $('actionPlanImage');
-        const empty = $('actionPlanEmpty');
-        const remove = $('actionPlanRemoveBtn');
-        if (!image || !empty) return;
-
-        image.classList.remove('is-preview');
-        image.removeAttribute('data-preview');
-
-        if (!data?.image_path) {
-            image.removeAttribute('src');
-            image.removeAttribute('data-path');
-            image.alt = '';
-            image.hidden = true;
-            empty.hidden = false;
-            if (remove) remove.hidden = true;
-            return;
-        }
-
-        const { data: publicData } = supabaseClient.storage
-            .from('plano-acao')
-            .getPublicUrl(data.image_path);
-
-        image.alt = 'Plano de ação';
-        image.src = `${publicData.publicUrl}?v=${encodeURIComponent(data.updated_at || Date.now())}`;
-        image.hidden = false;
-        empty.hidden = true;
-        image.dataset.path = data.image_path;
-        if (remove) remove.hidden = false;
-    }
-
-    function showActionNotice(message, type = 'success') {
-        const el = $('actionPlanAdminNotice');
-        if (!el) return;
-        el.textContent = message;
-        el.className = `integration-notice ${type}`;
-        el.hidden = false;
-        if (type !== 'error') setTimeout(() => { el.hidden = true; }, 4500);
-    }
-
-
-    function clearActionPlanPreview() {
-        const image = $('actionPlanImage');
-
-        if (actionPlanPreviewUrl) {
-            URL.revokeObjectURL(actionPlanPreviewUrl);
-            actionPlanPreviewUrl = null;
-        }
-
-        if (image) {
-            image.classList.remove('is-preview');
-            image.removeAttribute('data-preview');
-        }
-    }
-
-    function previewActionPlanFile(file) {
-        const image = $('actionPlanImage');
-        const empty = $('actionPlanEmpty');
-        if (!image || !empty || !file) return;
-
-        clearActionPlanPreview();
-        actionPlanPreviewUrl = URL.createObjectURL(file);
-
-        image.alt = 'Pré-visualização do plano de ação';
-        image.src = actionPlanPreviewUrl;
-        image.hidden = false;
-        image.classList.add('is-preview');
-        image.dataset.preview = 'true';
-
-        empty.hidden = true;
-
-        showActionNotice(
-            'Pré-visualização carregada. Confira a imagem e clique em “Publicar imagem” para confirmar.',
-            'preview'
-        );
-    }
-
-    async function uploadActionPlan() {
-        const input = $('actionPlanFile');
-        const file = input?.files?.[0];
-        if (!file) return;
-
-        if (!file.type.startsWith('image/')) {
-            return showActionNotice('Selecione um arquivo de imagem.', 'error');
-        }
-        if (file.size > 10 * 1024 * 1024) {
-            return showActionNotice('A imagem deve ter no máximo 10 MB.', 'error');
-        }
-
-        const btn = $('actionPlanUploadBtn');
-        if (btn) {
-            btn.disabled = true;
-            btn.textContent = 'Publicando...';
-        }
-
-        try {
-            const ext = (file.name.split('.').pop() || 'png').toLowerCase().replace(/[^a-z0-9]/g, '');
-            const path = `publicado/plano-acao-${Date.now()}.${ext}`;
-            const oldPath = $('actionPlanImage')?.dataset.path || '';
-
-            const { error: uploadError } = await supabaseClient.storage
-                .from('plano-acao')
-                .upload(path, file, { cacheControl: '3600', upsert: false, contentType: file.type });
-            if (uploadError) throw uploadError;
-
-            const { error: dbError } = await supabaseClient
-                .from('plano_acao')
-                .upsert({ id: 1, image_path: path, updated_at: new Date().toISOString() }, { onConflict: 'id' });
-            if (dbError) {
-                await supabaseClient.storage.from('plano-acao').remove([path]);
-                throw dbError;
-            }
-
-            if (oldPath && oldPath !== path) {
-                await supabaseClient.storage.from('plano-acao').remove([oldPath]);
-            }
-
-            input.value = '';
-            clearActionPlanPreview();
-            showActionNotice('Imagem publicada com sucesso.');
-            await loadActionPlan();
-        } catch (error) {
-            console.error(error);
-            showActionNotice(`Não foi possível publicar a imagem: ${error.message}`, 'error');
-        } finally {
-            if (btn) {
-                btn.disabled = true;
-                btn.textContent = 'Publicar imagem';
-            }
-        }
-    }
-
-    async function removeActionPlan() {
-        const confirmed = await uiConfirmModal({
-            title: 'Remover imagem',
-            description: 'Deseja remover a imagem atual do plano de ação?',
-            confirmText: 'Remover',
-            danger: true
-        });
-        if (!confirmed) return;
-        const image = $('actionPlanImage');
-        const oldPath = image?.dataset.path || '';
-
-        const { error } = await supabaseClient
-            .from('plano_acao')
-            .upsert({ id: 1, image_path: null, updated_at: new Date().toISOString() }, { onConflict: 'id' });
-
-        if (error) return showActionNotice(`Erro ao remover: ${error.message}`, 'error');
-        if (oldPath) await supabaseClient.storage.from('plano-acao').remove([oldPath]);
-
-        showActionNotice('Imagem removida.');
-        await loadActionPlan();
-    }
 
     function bindTrendTools() {
         const filter = $('trendPeriodFilter');
@@ -825,38 +660,6 @@
             btn.addEventListener('click', () => editTrendCard(btn.dataset.trendCard));
         });
 
-        const fileInput = $('actionPlanFile');
-        $('actionPlanChooseBtn')?.addEventListener('click', () => fileInput?.click());
-        fileInput?.addEventListener('change', () => {
-            const file = fileInput.files?.[0] || null;
-            const btn = $('actionPlanUploadBtn');
-
-            if (!file) {
-                if (btn) btn.disabled = true;
-                clearActionPlanPreview();
-                loadActionPlan();
-                return;
-            }
-
-            if (!file.type.startsWith('image/')) {
-                fileInput.value = '';
-                if (btn) btn.disabled = true;
-                showActionNotice('Selecione um arquivo de imagem.', 'error');
-                return;
-            }
-
-            if (file.size > 10 * 1024 * 1024) {
-                fileInput.value = '';
-                if (btn) btn.disabled = true;
-                showActionNotice('A imagem deve ter no máximo 10 MB.', 'error');
-                return;
-            }
-
-            if (btn) btn.disabled = false;
-            previewActionPlanFile(file);
-        });
-        $('actionPlanUploadBtn')?.addEventListener('click', uploadActionPlan);
-        $('actionPlanRemoveBtn')?.addEventListener('click', removeActionPlan);
     }
 
     async function init() {
@@ -875,11 +678,6 @@
             }
         }
 
-        try {
-            await loadActionPlan();
-        } catch (error) {
-            console.error('Erro ao carregar plano de ação:', error);
-        }
 
         window.addEventListener('dashboard:viewchange', event => {
             if (event.detail?.view === 'trends' && trendChart) {

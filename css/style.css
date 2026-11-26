@@ -2131,8 +2131,7 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
     align-items: center;
 }
 
-.integration-actions,
-.action-plan-upload-actions {
+.integration-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 9px;
@@ -2158,13 +2157,6 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
     color: #49616f;
     border-color: #d6dfe5;
 }
-
-.integration-btn.danger {
-    background: #fff5f4;
-    color: #b8382d;
-    border-color: #efc9c5;
-}
-
 .integration-btn:disabled {
     opacity: .55;
     cursor: not-allowed;
@@ -2252,9 +2244,7 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
 }
 
 .trend-chart-panel,
-.trend-admin-table-panel,
-.action-plan-admin-panel,
-.action-plan-stage {
+.trend-admin-table-panel {
     border: 1px solid #dfe5e9;
     border-radius: 12px;
     background: #fff;
@@ -2283,14 +2273,12 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
     padding: 18px;
 }
 
-.trend-table-header h3,
-.action-plan-upload-row h3 {
+.trend-table-header h3 {
     margin: 0 0 4px;
     font-size: 18px;
 }
 
-.trend-table-header p,
-.action-plan-upload-row p {
+.trend-table-header p {
     margin: 0;
     color: #7c8790;
     font-size: 12px;
@@ -2337,69 +2325,12 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
 .trend-actions .danger-link {
     color: #b8382d;
 }
-
-.action-plan-admin-panel {
-    padding: 18px;
-}
-
-.action-plan-upload-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    padding-bottom: 16px;
-}
-
-.action-plan-stage {
-    min-height: 520px;
-    padding: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: auto;
-}
-
-.action-plan-admin-panel .action-plan-stage {
-    box-shadow: none;
-    background: #f8fafb;
-}
-
-.action-plan-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    min-height: 360px;
-    color: #8a949c;
-    text-align: center;
-}
-
-.action-plan-empty strong {
-    color: #5a6771;
-    font-size: 18px;
-}
-
-.action-plan-empty span {
-    font-size: 13px;
-}
-
-.action-plan-image {
-    display: block;
-    width: min(100%, 1500px);
-    height: auto;
-    max-height: none;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
 @media (max-width: 1100px) {
     .trend-cards {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .integration-heading-actions,
-    .action-plan-upload-row {
+    .integration-heading-actions {
         align-items: flex-start;
         flex-direction: column;
     }
@@ -2418,14 +2349,7 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
         min-height: 380px;
         height: 460px;
     }
-
-    .action-plan-stage {
-        min-height: 360px;
-        padding: 10px;
-    }
-
-    .integration-actions,
-    .action-plan-upload-actions {
+.integration-actions {
         width: 100%;
     }
 
@@ -2436,43 +2360,14 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
 
 
 /* =========================================================
-   AJUSTES FINAIS — RÓTULOS DO GRÁFICO E ESTADO VAZIO
+   AJUSTES FINAIS — RÓTULOS DO GRÁFICO
    ========================================================= */
-
-.action-plan-stage {
-    position: relative;
-}
-
-.action-plan-empty {
-    width: 100%;
-    min-height: 360px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: auto;
-}
-
-.action-plan-empty strong,
-.action-plan-empty span {
-    display: block;
-    text-align: center;
-}
-
-.action-plan-image[hidden] {
-    display: none !important;
-}
-
 @media (max-width: 700px) {
-    .action-plan-empty {
-        min-height: 300px;
-    }
 }
 
 
 /* =========================================================
-   TÍTULOS EDITÁVEIS DAS ABAS + PREVIEW DO PLANO DE AÇÃO
+   TÍTULOS EDITÁVEIS DAS ABAS
    ========================================================= */
 .editable-view-heading-row {
     display: flex;
@@ -2516,26 +2411,6 @@ body.admin-mode .sidebar-footer.admin-only { flex-direction: column; }
     font-size: 13.5px;
     line-height: 1.5;
 }
-
-.action-plan-empty[hidden] {
-    display: none !important;
-}
-
-.action-plan-image[hidden] {
-    display: none !important;
-}
-
-.action-plan-image.is-preview {
-    outline: 2px dashed #86b9d5;
-    outline-offset: 6px;
-}
-
-.integration-notice.preview {
-    border-color: #bad9e9;
-    background: #f0f8fc;
-    color: #356b87;
-}
-
 @media (max-width: 700px) {
     .editable-view-heading-row {
         gap: 7px;
@@ -2920,9 +2795,7 @@ body.dialog-open { overflow: hidden; }
 .table-container,
 .trend-card,
 .trend-chart-panel,
-.trend-admin-table-panel,
-.action-plan-admin-panel,
-.action-plan-stage {
+.trend-admin-table-panel {
     outline: 1px solid #d7dde2;
     outline-offset: -1px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
